@@ -18,7 +18,12 @@ struct AST* AST_assignment(char nodeType[50], char LHS[50], char RHS[50]) {
     struct AST* ASTassign = malloc(sizeof(struct AST));
     strcpy(ASTassign->nodeType, nodeType);
     strcpy(ASTassign->LHS, LHS);
-    strcpy(ASTassign->RHS, RHS);
+    if (strcmp(nodeType, "=") == 0 && strlen(RHS) > 0) {
+        // RHS is a constant value, create a constant subtree
+        strcpy(ASTassign->RHS, "constant");
+    } else {
+        strcpy(ASTassign->RHS, RHS);
+    }
     ASTassign->left = NULL;
     ASTassign->right = NULL;
 
@@ -41,17 +46,6 @@ struct AST * AST_BinaryExpression(char nodeType[50], char LHS[50], char RHS[50])
 	return ASTBinExp;
 	
 }
-
-struct AST * AST_Number(char nodeType[50], char value[50]) {
-    struct AST* ast = (struct AST*)malloc(sizeof(struct AST));
-    strcpy(ast->nodeType, nodeType);
-    strcpy(ast->LHS, value);
-    strcpy(ast->RHS, "");
-    ast->left = NULL;
-    ast->right = NULL;
-    return ast;
-}
-
 struct AST * AST_Type(char nodeType[50], char LHS[50], char RHS[50]){
 
 	struct AST* ASTtype = malloc(sizeof(struct AST));
@@ -91,49 +85,14 @@ void printDots(int num)
 		printf("      ");
 }
 
-void printAST(struct AST* ast, int level) {
-    if (ast == NULL) {
-        return;
-    }
-
-    // Print indentation based on the level
-    for (int i = 0; i < level; i++) {
-        printf("  ");
-    }
-
-    // Print node type and value (if applicable)
-    if (strcmp(ast->nodeType, "Number") == 0) {
-        printf("%s: %s\n", ast->nodeType, ast->LHS);
-    } else {
-        printf("%s\n", ast->nodeType);
-    }
-
-    // Recursively print child nodes
-    printAST(ast->left, level + 1);
-    printAST(ast->right, level + 1);
+void printAST(struct AST* tree, int level){
+	if (tree == NULL) return;
+	printDots(level);
+	printf("%s\n", tree->nodeType);
+	printDots(level);
+	printf("%s %s\n", tree->LHS, tree->RHS);
+	if(tree->left != NULL) printAST(tree->left, level+1); else return;
+	if(tree->right != NULL) printAST(tree->right, level+1); else return;
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
