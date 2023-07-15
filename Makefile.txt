@@ -1,15 +1,15 @@
 all: parser
 
-test_parser.tab.c test_parser.tab.h: test_parser.y
-	bison -t -v -d test_parser.y
+parser.tab.c parser.tab.h: parser.y
+	bison -t -v -d parser.y
 
-lex.yy.c: test_lexer.l test_parser.tab.h
-	flex test_lexer.l
+lex.yy.c: lexer.l parser.tab.h
+	flex lexer.l
 
-parser: lex.yy.c test_parser.tab.c test_parser.tab.h
-	gcc -o parser test_parser.tab.c lex.yy.c
+parser: lex.yy.c parser.tab.c parser.tab.h
+	gcc -o parser parser.tab.c lex.yy.c
 	./parser TestProg.cmm
 
 clean:
-	rm -f parser lexer test_parser.tab.c lex.yy.c test_parser.tab.h test_parser.output
+	rm -f parser lexer parser.tab.c lex.yy.c parser.tab.h parser.output
 	ls -l
