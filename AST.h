@@ -1,4 +1,4 @@
-//Abstract Syntax Tree Implementation
+// Header file to create Abstract Syntax Tree (AST)
 #include <string.h>
 
 struct AST{
