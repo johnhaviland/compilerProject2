@@ -1,5 +1,5 @@
+// Header file to create IR code
 #include <stdio.h>
-// ---- Functions to handle IR code emissions ---- //
 FILE * IRcode;
 
 void  initIRcodeFile(){
