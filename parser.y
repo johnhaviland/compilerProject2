@@ -80,7 +80,7 @@ VarDecl:	TYPE ID SEMICOLON	{
 	printf("-----------> %s", $$->LHS);
 };
 
-StmtList:	
+StmtList:	{}
 	| Stmt StmtList
 ;
 
@@ -90,7 +90,7 @@ Stmt:	SEMICOLON {}
     }
 ;
 
-Expr:	ID EQ RecursiveFunc { 
+Expr:	ID EQ REC { 
             printf("\n RECOGNIZED RULE: Simplest expression\n"); 
             char id1[50], id2[50];
             sprintf(id1, "%s", $1);
@@ -171,11 +171,11 @@ Expr:	ID EQ RecursiveFunc {
         }	
 ;
 
-RecursiveFunc:	NUMBER ADD_OP RecursiveFunc {
+REC:	NUMBER ADD_OP REC {
     printf("\n RECOGNIZED RULE: NUMBER + REC\n");
 	sum = sum + $1;			
 };
-	| ID ADD_OP RecursiveFunc	{
+	| ID ADD_OP REC	{
         printf("\n RECOGNIZED RULE: ID + REC\n");
 		symTabAccess();
 		char id1[50];
@@ -208,15 +208,13 @@ int main(int argc, char**argv) {
 	    } 
 	}
 
-    printf(211);
+	printf(211);
 	initIRcodeFile();
-    printf(213);
+	printf(213);
 	initAssemblyFile();
-    printf(215);
-
+    	printf(215);
 
 	yyparse();
-
 
 	emitEndOfAssemblyCode();
 
