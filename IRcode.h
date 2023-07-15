@@ -2,7 +2,7 @@
 #include <stdio.h>
 FILE * IRcode;
 
-void  initIRcodeFile(){
+void initIRcodeFile(){
     IRcode = fopen("IRcode.ir", "w");
     fprintf(IRcode, "\n\n#### IR Code ####\n\n");
     fclose(IRcode);
@@ -21,15 +21,15 @@ void emitAssignment(char * id1, char * id2){
   fclose(IRcode);
 }
 
-void emitIR(char id1[50], char id2[50],int curScope[50]){
-    IRcode = fopen("IRcode.ir", "a");
-    fprintf(IRcode, "T%d = %s\n",curScope, id2);
-    fclose(IRcode);
-}
-
 void emitConstantIntAssignment (char id1[50], int id2[50]){
     IRcode = fopen("IRcode.ir", "a");
     fprintf(IRcode, "T%d = %s\n",id2, id1);
+    fclose(IRcode);
+}
+
+void emitIR(char id1[50], char id2[50],int curScope[50]){
+    IRcode = fopen("IRcode.ir", "a");
+    fprintf(IRcode, "T%d = %s\n",curScope, id2);
     fclose(IRcode);
 }
 
@@ -37,4 +37,3 @@ void emitWriteId(char * id){
     fprintf (IRcode, "output %s\n", "T2");
     fclose(IRcode);
 }
-    
