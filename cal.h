@@ -1,12 +1,12 @@
 #include <stdio.h>
 
 int ArrayofNumbers[10];
-int curentIndex = 0;
+int currentIndex = 0;
 
 void addItems(int item)
 {
-    ArrayofNumbers[cuurentIndex] = item;
-    curentIndex++;
+    ArrayofNumbers[currentIndex] = item;
+    currentIndex++;
 }
 
 int sumOfItems(){
