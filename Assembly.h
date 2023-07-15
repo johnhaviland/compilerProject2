@@ -1,4 +1,4 @@
-// File creates assembly code to be run in MIPS (QTSpim)
+// Header file to create Assembly code
 #include <stdio.h>
 
 void  initAssemblyFile(){
