@@ -1,16 +1,14 @@
-
-//Symbol table header
+// Header file that creates symbol table
 #include <string.h>
 
-struct Entry
-{
+struct Entry{
 	int itemID;
-	char itemName[50];  //the name of the identifier
-	char itemKind[8];  //is it a function or a variable?
-	char itemType[8];  // Is it int, char, etc.?
+	char itemName[50];
+	char itemKind[8];
+	char itemType[8];
 	int arrayLength;
 	int itemVal;
-	char scope[50];     // global, or the name of the function
+	char scope[50];
 };
 
 struct Entry symTabItems[100];
@@ -22,9 +20,6 @@ void symTabAccess(void){
 }
 
 void addItem(char itemName[50], char itemKind[8], char itemType[8], int arrayLength, char scope[50]){
-	
-
-		// what about scope? should you add scope to this function?
 		symTabItems[symTabIndex].itemID = symTabIndex;
 		strcpy(symTabItems[symTabIndex].itemName, itemName);
 		strcpy(symTabItems[symTabIndex].itemKind, itemKind);
@@ -33,74 +28,57 @@ void addItem(char itemName[50], char itemKind[8], char itemType[8], int arrayLen
 		symTabItems[symTabIndex].arrayLength = arrayLength;
 		strcpy(symTabItems[symTabIndex].scope, scope);
 		symTabIndex++;
-	
 }
-	int setValue(char itemName[50], int itemVal, char scope[50]){
-	// Lookup an identifier in the symbol table
-	// what about scope?
-	// return TRUE or FALSE
-	// Later on, you may want to return additional information
 
-	// Dirty loop, becuase it counts SYMTAB_SIZE times, no matter the size of the symbol table
-	for(int i=0; i<SYMTAB_SIZE; i++){
+int setValue(char itemName[50], int itemVal, char scope[50]){
+	for (int i = 0; i < SYMTAB_SIZE; i++){
 		int str1 = strcmp(symTabItems[i].itemName, itemName); 
 		int str2 = strcmp(symTabItems[i].scope,scope); 
 		
-		if( str1 == 0 && str2 == 0){
+		if (str1 == 0 && str2 == 0){
 			symTabItems[i].itemVal = itemVal;
-			return 1; // found the ID in the table
+			return 1;
 		}
 	}
+		
 	return 0;
 }
 
 void showSymTable(){
 	printf("itemID    itemName    itemKind    itemType     ArrayLength    itemSCope\n");
-	printf("-----------------------------------------------------------------------\n");
-	for (int i=0; i<symTabIndex; i++){
+	printf("=====================================================================\n");
+	
+	for (int i = 0; i < symTabIndex; i++){
 		printf("%5d %15s  %7d  %7s %7s %6d %15s \n",symTabItems[i].itemID, symTabItems[i].itemName, symTabItems[i].itemVal, symTabItems[i].itemKind, symTabItems[i].itemType, symTabItems[i].arrayLength, symTabItems[i].scope);
 	}
 	
-
-	printf("-----------------------------------------------------------------------\n");
+	printf("=====================================================================\n");
 }
 
 int found(char itemName[50], char scope[50]){
-	// Lookup an identifier in the symbol table
-	// what about scope?
-	// return TRUE or FALSE
-	// Later on, you may want to return additional information
-
-	// Dirty loop, becuase it counts SYMTAB_SIZE times, no matter the size of the symbol table
-	for(int i=0; i<SYMTAB_SIZE; i++){
+	for(int i = 0; i < SYMTAB_SIZE; i++){
 		int str1 = strcmp(symTabItems[i].itemName, itemName); 
-		//printf("\n\n---------> str1=%d: COMPARED: %s vs %s\n\n", str1, symTabItems[i].itemName, itemName);
 		int str2 = strcmp(symTabItems[i].scope,scope); 
-		//printf("\n\n---------> str2=%d: COMPARED %s vs %s\n\n", str2, symTabItems[i].itemName, itemName);
+		
 		if( str1 == 0 && str2 == 0){
-			return 1; // found the ID in the table
+			return 1;
 		} 
 	}
+	
 	return 0;
 }
 
 
 int getValue(char itemName[50],char scope[50]){
-	// Lookup an identifier in the symbol table
-	// what about scope?
-	// return TRUE or FALSE
-	// Later on, you may want to return additional information
 	int returnNum;
-	// Dirty loop, becuase it counts SYMTAB_SIZE times, no matter the size of the symbol table
-	for(int i=0; i<SYMTAB_SIZE; i++){
-		int str1 = strcmp(symTabItems[i].itemName, itemName); 
-		//printf("\n\n---------> str1=%d: COMPARED: %s vs %s\n\n", str1, symTabItems[i].itemName, itemName);
-		int str2 = strcmp(symTabItems[i].scope,scope); 
-		//printf("\n\n---------> str2=%d: COMPARED %s vs %s\n\n", str2, symTabItems[i].itemName, itemName);
-		if( str1 == 0 && str2 == 0){
-			returnNum = symTabItems[i].itemVal;
-			return symTabItems[i].itemVal; // found the ID in the table
 	
+	for(int i = 0; i < SYMTAB_SIZE; i++){
+		int str1 = strcmp(symTabItems[i].itemName, itemName); 
+		int str2 = strcmp(symTabItems[i].scope,scope); 
+
+		if(str1 == 0 && str2 == 0){
+			returnNum = symTabItems[i].itemVal;
+			return symTabItems[i].itemVal;
 		}
 	}
 
@@ -113,41 +91,32 @@ void printVal(){
 	}
 }
 
-
 int getID(char itemName[50],char scope[50]){
-	// Lookup an identifier in the symbol table
-	// what about scope?
-	// return TRUE or FALSE
-	// Later on, you may want to return additional information
 	int returnID;
-	// Dirty loop, becuase it counts SYMTAB_SIZE times, no matter the size of the symbol table
-	for(int i=0; i<SYMTAB_SIZE; i++){
+
+	for(int i = 0; i < SYMTAB_SIZE; i++){
 		int str1 = strcmp(symTabItems[i].itemName, itemName); 
-		//printf("\n\n---------> str1=%d: COMPARED: %s vs %s\n\n", str1, symTabItems[i].itemName, itemName);
 		int str2 = strcmp(symTabItems[i].scope,scope); 
-		//printf("\n\n---------> str2=%d: COMPARED %s vs %s\n\n", str2, symTabItems[i].itemName, itemName);
+		
 		if( str1 == 0 && str2 == 0){
 			returnID = (int)(symTabItems[i].itemID)+0;
-			return returnID; // found the ID in the table
-	
+			return returnID;
 		}
 	}
+	
 	return 0;
 }
 
 const char* getVariableType(char itemName[50], char scope[50]){
-	//char *name = "int";
-	//return name;
-
 	for(int i=0; i<SYMTAB_SIZE; i++){
 		int str1 = strcmp(symTabItems[i].itemName, itemName); 
-		//printf("\n\n---------> str1=%d: COMPARED: %s vs %s\n\n", str1, symTabItems[i].itemName, itemName);
 		int str2 = strcmp(symTabItems[i].scope,scope); 
-		//printf("\n\n---------> str2=%d: COMPARED %s vs %s\n\n", str2, symTabItems[i].itemName, itemName);
+
 		if( str1 == 0 && str2 == 0){
-			return symTabItems[i].itemType; // found the ID in the table
+			return symTabItems[i].itemType;
 		}
 	}
+	
 	return NULL;
 }
 
@@ -158,9 +127,11 @@ int compareTypes(char itemName1[50], char itemName2[50],char scope[50]){
 	printf("%s = %s\n", idType1, idType2);
 	
 	int typeMatch = strcmp(idType1, idType2);
+	
 	if(typeMatch == 0){
-		return 1; // types are matching
+		return 1; 
 	}
+		
 	else return 0;
 }
     
