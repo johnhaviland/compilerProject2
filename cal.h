@@ -3,8 +3,7 @@
 int ArrayofNumbers[10];
 int currentIndex = 0;
 
-void addItems(int item)
-{
+void addItems(int item){
     ArrayofNumbers[currentIndex] = item;
     currentIndex++;
 }
