@@ -1,6 +1,8 @@
 // Header file to create IR code
 #include <stdio.h>
 FILE * IRcode;
+int numbers[10];
+int index = 0;
 
 void initIRcodeFile(){
     IRcode = fopen("IRcode.ir", "w");
@@ -36,4 +38,19 @@ void emitIR(char id1[50], char id2[50],int currentScope[50]){
 void emitWriteId(char * id){
     fprintf (IRcode, "output %s\n", "T2");
     fclose(IRcode);
+}
+
+void addNumbers(int num){
+    numbers[index] = num;
+    index++;
+}
+
+int sumOfNumbers(){
+    int sum = 0;
+    for (int i = 0; i < 50; i++){
+        sum += numbers[i];
+        numbers[i] = 0;
+    }
+    
+    return sum;
 }
