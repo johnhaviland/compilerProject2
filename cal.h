@@ -1,18 +1,18 @@
 #include <stdio.h>
 
-int ArrayofNumbers[10];
-int currentIndex = 0;
+int numbers[10];
+int index = 0;
 
-void addItems(int item){
-    ArrayofNumbers[currentIndex] = item;
-    currentIndex++;
+void addNumbers(int num){
+    numbers[index] = num;
+    index++;
 }
 
-int sumOfItems(){
+int sumOfNumbers(){
     int sum = 0;
     for (int i = 0; i < 50; i++){
-        sum += ArrayofNumbers[i];
-        ArrayofNumbers[i] = 0;
+        sum += numbers[i];
+        numbers[i] = 0;
     }
     
     return sum;
