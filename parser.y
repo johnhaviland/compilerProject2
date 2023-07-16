@@ -38,7 +38,7 @@ int semanticCheckPassed = 1;
 %printer { fprintf(yyoutput, "%s", $$); } ID;
 %printer { fprintf(yyoutput, "%d", $$); } NUMBER;
 
-%type <ast> Program DeclList Decl VarDecl Stmt StmtList Expr
+%type <ast> Program DeclList Decl VarDecl Stmt StmtList Expr REC
 
 %start Program
 
