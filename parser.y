@@ -7,7 +7,6 @@
 #include "AST.h"
 #include "IRcode.h"
 #include "Assembly.h"
-#include "cal.h"
 
 extern int yylex();
 extern int yyparse();
@@ -32,7 +31,7 @@ int semanticCheckPassed = 1;
 %token <string> ID
 %token <char> SEMICOLON
 %token <char> EQ 
-%token <char> ADD_OP
+%token <char> PLUS
 %token <number> NUMBER
 %token <string> WRITE
 
@@ -171,11 +170,11 @@ Expr:	ID EQ REC {
         }	
 ;
 
-REC:	NUMBER ADD_OP REC {
+REC:	NUMBER PLUS REC {
     printf("\n RECOGNIZED RULE: NUMBER + REC\n");
 	sum = sum + $1;			
 };
-	| ID ADD_OP REC	{
+	| ID PLUS REC	{
         printf("\n RECOGNIZED RULE: ID + REC\n");
 		symTabAccess();
 		char id1[50];
@@ -208,14 +207,10 @@ int main(int argc, char**argv) {
 	    } 
 	}
 
-	printf(211);
+
 	initIRcodeFile();
-	printf(213);
 	initAssemblyFile();
-    	printf(215);
-
 	yyparse();
-
 	emitEndOfAssemblyCode();
 
 }
