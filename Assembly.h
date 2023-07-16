@@ -18,8 +18,8 @@ void emitMIPSAssignment(char * id1, char * id2){
   fprintf(MIPScode, "li $t2,$t1\n");
 }
 
-void emitMIPSConstantIntAssignment (char id1[50], char id2[50],int curScope[50]){
-    fprintf(MIPScode, "li $t%d,%s\n",curScope, id2);
+void emitMIPSConstantIntAssignment (char id1[50], char id2[50],int currentScope[50]){
+    fprintf(MIPScode, "li $t%d,%s\n",currentScope, id2);
 }
 
 void emitMIPSWriteId(char * id, int count){
