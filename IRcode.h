@@ -23,13 +23,13 @@ void emitAssignment(char * id1, char * id2){
 
 void emitConstantIntAssignment (char id1[50], int id2[50]){
     IRcode = fopen("IRcode.ir", "a");
-    fprintf(IRcode, "T%d = %s\n",id2, id1);
+    fprintf(IRcode, "T%d = %s\n", id2, id1);
     fclose(IRcode);
 }
 
-void emitIR(char id1[50], char id2[50],int curScope[50]){
+void emitIR(char id1[50], char id2[50],int currentScope[50]){
     IRcode = fopen("IRcode.ir", "a");
-    fprintf(IRcode, "T%d = %s\n",curScope, id2);
+    fprintf(IRcode, "T%d = %s\n", currentScope, id2);
     fclose(IRcode);
 }
 
