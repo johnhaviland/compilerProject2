@@ -46,7 +46,7 @@ int setValue(char itemName[50], int itemVal, char scope[50]){
 }
 
 void showSymTable(){
-	printf("itemID    itemName    itemKind    itemType     ArrayLength    itemSCope\n");
+	printf("itemID    itemName    itemKind    itemType     ArrayLength    itemScope\n");
 	printf("=====================================================================\n");
 	
 	for (int i = 0; i < symTabIndex; i++){
