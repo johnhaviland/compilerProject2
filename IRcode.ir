@@ -4,6 +4,5 @@
 
 T0 = x
 T1 = y
-T0 = 15
 T1 = 16
 output T1
